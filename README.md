@@ -57,7 +57,7 @@ These instructions are for debian-based systems (e.g. Debian, Ubuntu, etc.).
     ```
     #start Supervisor (if not already started)
     sudo service supervisor start
-    
+
     cd nfsrest/fab
     fab add_supervisor_process:<unique-worker-name>, <script.sh>, <python-environment-activation-path>, <full-path-to-Django-manage.py>,"'space-separated-queues-to-service'"
 
@@ -69,7 +69,7 @@ These instructions are for debian-based systems (e.g. Debian, Ubuntu, etc.).
     # $1: Path of Django's environment's activate script
     # $2: django manage.py command (including full path)
     # $3: ids of queues this worker pulls jobs from (space separated)
-    source /usr/local/bin/virtualenvwrapper.sh; source $1; python $2 rqworker $3
+    source $1; python $2 rqworker $3
     ```
     Confirm that the work processes launched
     ```

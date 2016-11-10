@@ -92,7 +92,8 @@ def delete_directory (dirpath):
 
 
 @task
-def add_supervisor_process(program_name, program_script, user,password, *program_args):
+def add_supervisor_process(program_name, program_script, django_env, 
+    djangomgmtcmd, user, password, *program_args):
     """
     Add a script to supervisor.
     if program_name.conf is not present as 
@@ -117,7 +118,10 @@ def add_supervisor_process(program_name, program_script, user,password, *program
         append(scriptPath, scriptText, use_sudo = True)
         sudo("chmod +x "+scriptPath)
         
-        cmd = os.path.join("/usr/local/bin/",program_name+".sh ") + " ".join(program_args)
+        cmd = scriptpath + 
+        " ".join([django_env, djangomgmtcmd]) + 
+        " ".join(program_args)
+        
         conftext = dedent (
             """
             [program:{}]
