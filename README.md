@@ -6,7 +6,17 @@ So how do you put a RESTful API in front of the command line? The Hootie project
 
 Here is a picture illustrating the system's architecture.
 
-# Installation
+
+# Quick start
+
+A Hootie-all-in-one Vagrantfile is included in the infra directory. Install Vagrant, and then simply run
+```
+vagrant up
+```
+
+Then, assuming the vagrant VM has an IP 1.2.3.4, you can skip to the usage section below (replace localhost with 1.2.3.4, port 8080).
+
+# Detailed Installation Instructions
 
 These instructions are for debian-based systems (e.g. Debian, Ubuntu, etc.).
 
