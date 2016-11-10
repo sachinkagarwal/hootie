@@ -30,24 +30,35 @@ These instructions are for debian-based systems (e.g. Debian, Ubuntu, etc.).
     sudo apt-get install -y \
     python-pip python-dev build-essential \
     supervisor redis-server \
-    git virtualenv virtualenvwrapper \
+    git python-virtualenv \
 
     ```
     * Create a default SSH-keypair and use ssh-copy-id to copy the public key into each NFS server.
+    ```
+    # Avoiding passphrase prompts
+    cat /dev/zero | ssh-keygen -q -N ""
+    ```
 
-    * Clone the Hootie master branch from https://github.com/sachinkagarwal/hootie
+    * Clone the Hootie master branch from https://github.com/sachinkagarwal/hootie.git
+    ```
+    git clone 
+    ```
 
     * Create a virtualenvironment and install the requirements.txt python packages
     ```
     cd hootie
-    mkvirtualenv hootie
+    virtualenv hootie
+    source hootie/bin/activate
     pip install -r requirements.txt
     ```
     
     * Create RQ-worker processes
     Launch RQ workers
     ```
-    cd hootie/nfsrest/fab
+    #start Supervisor (if not already started)
+    sudo service supervisor start
+    
+    cd nfsrest/fab
     fab add_supervisor_process:<unique-worker-name>, <script.sh>, <python-environment-activation-path>, <full-path-to-Django-manage.py>,"'space-separated-queues-to-service'"
 
     #Example

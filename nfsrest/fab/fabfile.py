@@ -108,8 +108,8 @@ def add_supervisor_process(program_name, program_script, user,password, *program
         pass
     else:
         #Install supervisor if needed
-        installpackage("supervisor")
-        sudo ("service  supervisor start")
+        #installpackage("supervisor")
+        #sudo ("service  supervisor start")
         
         # Copy script file to /usr/local/bin
         scriptText = open(program_script).read()
