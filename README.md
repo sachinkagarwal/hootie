@@ -59,10 +59,15 @@ These instructions are for debian-based systems (e.g. Debian, Ubuntu, etc.).
     sudo service supervisor start
 
     cd nfsrest/fab
-    fab add_supervisor_process:<unique-worker-name>, <script.sh>, <python-environment-activation-path>, <full-path-to-Django-manage.py>,"'space-separated-queues-to-service'"
+    fab add_supervisor_process:<unique-worker-name>, <script.sh>, <python-environment-activation-path>, \
+    <full-path-to-Django-manage.py>, username, password, "'space-separated-queues-to-service'"
 
-    #Example
-    fab add_supervisor_process:rqworker1,rqworker.sh,/home/sysact/.virtualenvs/hootie/bin/activate,/home/sysact/hootie/nfsrest/manage.py,"'queue1 queue2 queue3 queue4 queue5'"
+    #Example - start 2 workers
+    fab add_supervisor_process:rqworker1,rqworker.sh,/home/vagrant/hootie/hootie/bin/activate, \
+    /home/vagrant/hootie/nfsrest/manage.py,vagrant,vagrant,"'queue1 queue2 queue3 queue4 queue5'"
+
+    fab add_supervisor_process:rqworker2,rqworker.sh,/home/vagrant/hootie/hootie/bin/activate, \
+    /home/vagrant/hootie/nfsrest/manage.py,vagrant,vagrant,"'queue1 queue2 queue3 queue4 queue5'"
 
     #rqworker.sh
     #!/bin/bash
@@ -73,7 +78,7 @@ These instructions are for debian-based systems (e.g. Debian, Ubuntu, etc.).
     ```
     Confirm that the work processes launched
     ```
-    ps -aux | grep rqworker1 # Look for a process in the list
+    ps -aux | grep rqworker1 # Look for a process "rqworker1" in the list
     sudo service supervisor restart
     sudo supervisorctl # Confirm rqworker1 process to be "running"
     pkill -f rqworker1 # Kill process
@@ -84,16 +89,21 @@ These instructions are for debian-based systems (e.g. Debian, Ubuntu, etc.).
     Launch the Django server (these are testing/development instructions,  for production consider uWSGI and nginx frontends).
 
     ```
-    cd hootie/nfsrest
-    workon hootie
-    python manage.py runserver 0.0.0.0:8080
-    # Migrations
+    cd .. # Back to nfsrest directory
+
+     # Migrations
     python manage.py makemigrations
     python manage.py migrate
     # Create a superuser
     python manage.py createsuperuser
-    
+    python manage.py runserver 0.0.0.0:8080
+   
     ```
+3. NFS Server and Rootpath Setup 
+ * Create a root-path directory on the NFS server that will be the base directory on which subdirectories will be created and exported.
+ * Log into the the django admin website and add a NFS server via the GUI (simply specify its DNS name or IP address). Next, add a "rootpath", specifying the directory created above and with the added NFS server as its containing server, also specify the "capacity" of this rootpath.
+
+Repeat step 3 for each rootpath and nfs server.
 
 # Usage
 
