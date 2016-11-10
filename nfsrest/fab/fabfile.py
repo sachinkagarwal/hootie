@@ -102,7 +102,8 @@ def add_supervisor_process(program_name, program_script, django_env,
     /etc/supervisor/conf.d/program_name.conf.
     Signal supervisor to load this new conf file
     """
-
+    env.user = user
+    env.password = password
     #Pass if the conf file exists.
     if exists(os.path.join("/etc/supervisor/conf.d/",
         program_name+".conf"),use_sudo = True):
@@ -118,9 +119,8 @@ def add_supervisor_process(program_name, program_script, django_env,
         append(scriptPath, scriptText, use_sudo = True)
         sudo("chmod +x "+scriptPath)
         
-        cmd = scriptpath + 
-        " ".join([django_env, djangomgmtcmd]) + 
-        " ".join(program_args)
+        cmd = " ".join([scriptPath,django_env, 
+		djangomgmtcmd, " ".join(program_args)])
         
         conftext = dedent (
             """
