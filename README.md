@@ -49,9 +49,9 @@ These instructions are for debian-based systems (e.g. Debian, Ubuntu, etc.).
     cat /dev/zero | ssh-keygen -q -N ""
     ```
 
-    * Clone the Hootie master branch from https://github.com/sachinkagarwal/hootie.git
+    * Clone the Hootie master branch from 
     ```
-    git clone 
+    git clone https://github.com/sachinkagarwal/hootie.git
     ```
 
     * Create a virtualenvironment and install the requirements.txt python packages
