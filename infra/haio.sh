@@ -17,12 +17,12 @@ sudo apt-get install -y \
 service supervisor start
 
 # Become vagrant User
-sudo su - vagrant
+su - vagrant
 
 #Create SSH keys
 cat /dev/zero | ssh-keygen -q -N ""   
 
-# Clone hootiegit clone 
+# Clone hootie
 git clone https://github.com/sachinkagarwal/hootie.git
 
 #pip Packages
