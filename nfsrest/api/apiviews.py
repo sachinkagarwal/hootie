@@ -114,6 +114,10 @@ class VolumeDetail(APIView):
 #        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, id, format=None):
+        """
+        Delete the volume with PK = id
+        Todo: Wrap this up in the RQworker async process model as done with POST
+        """
         volume = self.get_object(id, request.user)
         volume.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
