@@ -14,7 +14,10 @@ A Hootie-all-in-one Vagrantfile is included in the infra directory. Install Vagr
 vagrant up
 ```
 
+This will setup a single Vagrant VM with Hootie and a nfs kernel server.
+
 Then, assuming the vagrant VM has an IP 1.2.3.4, you can skip to the usage section below (replace localhost with 1.2.3.4, port 8080).
+You can log into the Django admin interface at http://1.2.3.4:8080/admin (User, password: admin,admin)
 
 # Detailed Installation Instructions
 
