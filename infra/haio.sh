@@ -34,7 +34,7 @@ cat id_rsa.pub >> authorized_keys
 chmod 600 authorized_keys
 # Clone hootie
 cd /home/vagrant
-git clone https://github.com/sachinkagarwal/hootie.git /home/vagrant
+git clone https://github.com/sachinkagarwal/hootie.git 
 sleep 5
 #pip Packages
 cd hootie
