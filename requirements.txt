@@ -16,4 +16,3 @@ six==1.10.0
 stevedore==1.17.1
 virtualenv==15.0.3
 virtualenv-clone==0.2.6
-supervisor==3.3.1
