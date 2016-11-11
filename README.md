@@ -79,29 +79,14 @@ These instructions are for debian-based systems (e.g. Debian, Ubuntu, etc.).
     ```
     
     * Create RQ-worker processes
-    Launch RQ workers
+
+    Use something like supervisor in a production envinronment.
     ```
-    #start Supervisor (if not already started)
-    sudo service supervisor start
-
-    cd nfsrest/fab
-    fab add_supervisor_process:<unique-worker-name>, \
-    <full-path-to-Django-manage.py>, username, password, "space-separated-queues-to-service"
-
-    #Example - start 2 workers
-    fab add_supervisor_process:rqworker1,/home/vagrant/hootie/nfsrest/manage.py,vagrant,vagrant,"queue1 queue2 queue3 queue4 queue5"
-
-    fab add_supervisor_process:rqworker2,/home/vagrant/hootie/nfsrest/manage.py,vagrant,vagrant,"queue1 queue2 queue3 queue4 queue5"
+    nohup bash -c "python /home/vagrant/hootie/nfsrest/manage.py rqworker queue1 queue2 queue3 queue4 queue5"  1>/dev/null 2>/dev/null &
+    nohup bash -c "python /home/vagrant/hootie/nfsrest/manage.py rqworker queue1 queue2 queue3 queue4 queue5"  1>/dev/null 2>/dev/null &
 
     ```
-    Confirm that the work processes launched
-    ```
-    ps -aux | grep rqworker1 # Look for a process "rqworker1" in the list
-    sudo service supervisor restart
-    sudo supervisorctl # Confirm rqworker1 process to be "running"
-    pkill -f rqworker1 # Kill process
-    ps -aux | grep rqworker1 #Supervisor would have restarted the killed process
-    ```
+ 
 
     * Run the Django server
     Launch the Django server (these are testing/development instructions,  for production consider uWSGI and nginx frontends).

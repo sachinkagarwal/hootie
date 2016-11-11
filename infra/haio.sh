@@ -37,26 +37,22 @@ cd hootie
 #virtualenv hootie
 #source hootie/bin/activate
 sudo pip install -r requirements.txt
-#Start supervisor
-sudo service supervisor start
 
-
-#Start 2 RQ workers
-
+# Start 2 RQ workers
+# Use something like supervisor for a production environment
 nohup bash -c "python /home/vagrant/hootie/nfsrest/manage.py rqworker queue1 queue2 queue3 queue4 queue5"  1>/dev/null 2>/dev/null &
 nohup bash -c "python /home/vagrant/hootie/nfsrest/manage.py rqworker queue1 queue2 queue3 queue4 queue5"  1>/dev/null 2>/dev/null &
-ps -aux | grep rqworker1
-ps -aux | grep rqworker2
 
 #A root path directory
 mkdir /home/vagrant/nfsrootpath
 
 #Create Django sqllite DB 
-cd ..
+cd /home/vagrant/hootie/nfsrest
 python manage.py migrate
 echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'admin')" | python manage.py shell
  
 python manage.py runserver 0.0.0.0:8080
+
 EOF
 
 chmod 755 /home/vagrant/installasvagrant.sh
