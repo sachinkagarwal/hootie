@@ -1,5 +1,3 @@
-import logging
-
 from django.contrib.auth.models import User
 from django.http import Http404
 from django.views.decorators.csrf import csrf_exempt
@@ -16,7 +14,7 @@ from utils.volumemaker import PostHelper
 from .models import RootPath, Volume
 from .serializers import RootPathSerializer, VolumeSerializer
 
-logger = logging.getLogger(__name__)
+
 
 class VolumeList(APIView):
     """
@@ -65,9 +63,8 @@ class VolumeList(APIView):
                     if job.result == 1:
                         return Response({"error":"None"}, status=status.HTTP_201_CREATED)
                     else:
-                         if job.result < 0:
-                             return Response({"error":"Internal Error code = " + str(job.result)}, 
-                                status=status.HTTP_500_INTERNAL_SERVER_ERROR)  
+                        return Response({"error":"Internal Error code = " + str(job.result)}, 
+                        status=status.HTTP_500_INTERNAL_SERVER_ERROR)  
                 ctr = ctr + 1
             # If we haven't got a successful response, exit    
             return Response(

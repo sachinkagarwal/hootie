@@ -60,6 +60,6 @@ def PostHelper(jobdata):
         return 1
         #return Response({"error":"None"}, status=status.HTTP_201_CREATED)
     except:
-        return -4
+        return format_exc()
         #return Response(
         #    {"error": format_exc()}, status.HTTP_500_INTERNAL_SERVER_ERROR)
