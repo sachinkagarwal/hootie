@@ -11,10 +11,7 @@ sudo apt-get install -y \
     python-pip python-dev build-essential \
     redis-server \
     git python-virtualenv \
-    fabric \
-
-# REmove supervisor, will reinstall via pip
-sudo apt-get remove supervisor --purge
+    fabric 
 
 cat << EOF > /home/vagrant/installasvagrant.sh
 #!/bin/bash
@@ -43,11 +40,11 @@ cd hootie
 sudo pip install -r requirements.txt
 
 # Start 2 RQ workers
-# Use something like supervisor for a production environment
+# Use something like supervisor for a production environment, or atleast pipe the logs for post-mortems
 nohup bash -c "python /home/vagrant/hootie/nfsrest/manage.py rqworker queue1 queue2 queue3 queue4 queue5"  1>/dev/null 2>/dev/null &
 nohup bash -c "python /home/vagrant/hootie/nfsrest/manage.py rqworker queue1 queue2 queue3 queue4 queue5"  1>/dev/null 2>/dev/null &
 
-#A root path directory
+#A root path directory, use this iwhile setting up a root path in the Django admin
 mkdir -p /home/vagrant/nfsrootpath
 
 #Create Django sqllite DB 
