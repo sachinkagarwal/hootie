@@ -9,13 +9,12 @@ sudo apt-get update
 # Packages for hootie server
 sudo apt-get install -y \
     python-pip python-dev build-essential \
-    supervisor redis-server \
+    redis-server \
     git python-virtualenv \
     fabric \
 
-#Start supervisor
-service supervisor start
-
+# REmove supervisor, will reinstall via pip
+sudo apt-get remove supervisor --purge
 
 cat << EOF > /home/vagrant/installasvagrant.sh
 #!/bin/bash
@@ -38,6 +37,8 @@ cd hootie
 #virtualenv hootie
 #source hootie/bin/activate
 sudo pip install -r requirements.txt
+#Start supervisor
+sudo service supervisor start
 
 
 #Start 2 RQ workers
