@@ -76,18 +76,10 @@ These instructions are for debian-based systems (e.g. Debian, Ubuntu, etc.).
     <full-path-to-Django-manage.py>, username, password, "'space-separated-queues-to-service'"
 
     #Example - start 2 workers
-    fab add_supervisor_process:rqworker1,rqworker.sh,/home/vagrant/hootie/hootie/bin/activate, \
-    /home/vagrant/hootie/nfsrest/manage.py,vagrant,vagrant,"'queue1 queue2 queue3 queue4 queue5'"
+    fab add_supervisor_process:rqworker1,/home/vagrant/hootie/nfsrest/manage.py,vagrant,vagrant,"queue1 queue2 queue3 queue4 queue5"
 
-    fab add_supervisor_process:rqworker2,rqworker.sh,/home/vagrant/hootie/hootie/bin/activate, \
-    /home/vagrant/hootie/nfsrest/manage.py,vagrant,vagrant,"'queue1 queue2 queue3 queue4 queue5'"
+    fab add_supervisor_process:rqworker2,/home/vagrant/hootie/nfsrest/manage.py,vagrant,vagrant,"queue1 queue2 queue3 queue4 queue5"
 
-    #rqworker.sh
-    #!/bin/bash
-    # $1: Path of Django's environment's activate script
-    # $2: django manage.py command (including full path)
-    # $3: ids of queues this worker pulls jobs from (space separated)
-    source $1; python $2 rqworker $3
     ```
     Confirm that the work processes launched
     ```
