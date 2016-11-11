@@ -32,9 +32,9 @@ sudo service supervisor start
 
 #Start 2 RQ workers
 cd nfsrest/fab
-fab add_supervisor_process:rqworker1,rqworker.sh,/home/vagrant/hootie/hootie/bin/activate,/home/vagrant/hootie/nfsrest/manage.py,vagrant,vagrant,"'queue1 queue2 queue3 queue4 queue5'"
+fab add_supervisor_process:rqworker1,/home/vagrant/hootie/hootie/bin/activate,/home/vagrant/hootie/nfsrest/manage.py,vagrant,vagrant,"'queue1 queue2 queue3 queue4 queue5'"
 
-fab add_supervisor_process:rqworker2,rqworker.sh,/home/vagrant/hootie/hootie/bin/activate,/home/vagrant/hootie/nfsrest/manage.py,vagrant,vagrant,"'queue1 queue2 queue3 queue4 queue5'"
+fab add_supervisor_process:rqworker2,/home/vagrant/hootie/hootie/bin/activate,/home/vagrant/hootie/nfsrest/manage.py,vagrant,vagrant,"'queue1 queue2 queue3 queue4 queue5'"
 
 ps -aux | grep rqworker1
 ps -aux | grep rqworker2
