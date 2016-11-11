@@ -9,7 +9,7 @@ if os.environ.has_key('FABAC_USER'):
 if os.environ.has_key('FABRIC_PASS'):
     env.password = os.environ['FABAC_PASS']
 if os.environ.has_key('FABRIC_KEY'):
-    env.password = os.environ['FABAC_KEY']
+    env.key_filename = os.environ['FABAC_KEY']
 
 
 # While using "execute" to call fabric methods
