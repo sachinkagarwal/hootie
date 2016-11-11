@@ -132,8 +132,9 @@ def add_supervisor_process(program_name,
             autorestart=true
             stderr_logfile=/var/log/{}.err.log
             stdout_logfile=/var/log/{}.out.log
+            environment=FABAC_USER={},FABAC_PASS={},FABAC_KEY={}
             """.format(program_name,cmd, env.user,
-                program_name,program_name))
+                program_name,program_name,env.user,env.password,env.key_filename))
             #Careful with the sizes of those log files; 
             #rotate them in production
 
