@@ -10,6 +10,9 @@ Here is a picture illustrating the system's architecture.
 
 [logo]: https://github.com/sachinkagarwal/hootie/raw/master/doc/hootie-high-level-arch.png "Hootie -High level architecture."
 
+
+*Related documentation:* [Pycon Canada 2016 Talk (PDF slides)](https://github.com/sachinkagarwal/hootie/raw/master/doc/PyconCanada-2016-LinuxRestAPIFabric.pdf)
+
 # Quick start
 
 * Clone the Hootie master branch from 
