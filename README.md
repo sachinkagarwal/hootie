@@ -34,7 +34,7 @@ Then you can skip to the usage section below.
 These instructions are for debian-based systems (e.g. Debian, Ubuntu, etc.).
 
 1. On each NFS server 
-    * Create a sudo-enabled system account (lets call it sysact) with a home directory and use visudo to give it password-less sudo capability. In this version of hootie a password-based ssh login into this account is required. 
+    * Create a sudo-enabled system account (lets call it vagrant) with a home directory and use visudo to give it password-less sudo capability. In this version of hootie a password-based ssh login into this account is required. 
     * Install 
     ```
     sudo apt-get update
@@ -46,7 +46,7 @@ These instructions are for debian-based systems (e.g. Debian, Ubuntu, etc.).
     * Create the root_path(s) - base directories - on each NFS-server where subdirectories corresponding to NFS volumes will be created.
 2. On the Hootie server
     
-    * Create a sudo-enabled system account (lets call it sysact) with a home directory and use visudo to give it password-less sudo capability.  
+    * Create a sudo-enabled system account (lets call it vagrant) with a home directory and use visudo to give it password-less sudo capability.  
     * Install
     ```
     sudo apt-get update
@@ -61,7 +61,7 @@ These instructions are for debian-based systems (e.g. Debian, Ubuntu, etc.).
     # Avoiding passphrase prompts
     cat /dev/zero | ssh-keygen -q -N ""
     ```
-
+    Use ssh-copy-id to allow passwordless login from the vagrant user to each NFS server
     * Clone the Hootie master branch from 
     ```
     git clone https://github.com/sachinkagarwal/hootie.git

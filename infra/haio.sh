@@ -27,8 +27,11 @@ export FABAC_PASS=vagrant
 export FABAC_KEY=/home/vagrant/.ssh/id_rsa
 EF
 #Create SSH keys
-cat /dev/zero | ssh-keygen -q -N ""   
-
+cat /dev/zero | ssh-keygen -q -N ""
+#Setup autologin
+cd /home/vagrant/.ssh   
+cat id_rsa.pub >> authorized_keys
+chmod 600 authorized_keys
 # Clone hootie
 git clone https://github.com/sachinkagarwal/hootie.git
 
