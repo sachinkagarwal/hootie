@@ -26,7 +26,7 @@ This will setup a single Vagrant VM with Hootie and a nfs kernel server at 192.1
  * Create a root-path directory that will be the base directory on which subdirectories will be created and exported.
  * On the host machine, open a browser and log into the the django admin website at http://192.168.50.2:8080/admin (User, password: admin,admin) to add a NFS server via the GUI (simply specify its IP addres 192.168.50.2). Next, add a "rootpath", specifying the directory created above and with 192.168.50.2 as the containing NFS server; also specify the "capacity" of this rootpath.
 
-Then you can skip to the usage section below (replace localhost with 192.168.50.2, port 8080).
+Then you can skip to the usage section below.
 
 
 # Detailed Installation Instructions
@@ -80,13 +80,13 @@ These instructions are for debian-based systems (e.g. Debian, Ubuntu, etc.).
     
     * Create RQ-worker processes
 
-    Use something like supervisor in a production envinronment.
+    
     ```
     nohup bash -c "python /home/vagrant/hootie/nfsrest/manage.py rqworker queue1 queue2 queue3 queue4 queue5"  1>/dev/null 2>/dev/null &
     nohup bash -c "python /home/vagrant/hootie/nfsrest/manage.py rqworker queue1 queue2 queue3 queue4 queue5"  1>/dev/null 2>/dev/null &
 
     ```
- 
+    Suggestion: Use something like supervisor to daemonize these commands in a production envinronment.
 
     * Run the Django server
     Launch the Django server (these are testing/development instructions,  for production consider uWSGI and nginx frontends).
@@ -117,7 +117,7 @@ Repeat step 3 for each rootpath and nfs server.
 
 ```
 # Get root paths' pks
-$> http GET http://localhost:8080/api/v1.0/rootpaths/HTTP/1.0 200 OK
+$> http GET http://192.168.50.2:8080/api/v1.0/rootpaths/HTTP/1.0 200 OK
 Allow: GET, HEAD, OPTIONS
 Content-Type: application/json
 Date: Tue, 08 Nov 2016 11:36:08 GMT
@@ -128,13 +128,13 @@ X-Frame-Options: SAMEORIGIN
 [
     {
         "pk": 1, 
-        "server_path": "localhost:/home/sachin/temp"
+        "server_path": "192.168.50.2:/home/sachin/temp"
     }
 ]
 
 $> 
 # Create NFS volume
-$> http POST http://localhost:8080/api/v1.0/volumes/ \
+$> http POST http://192.168.50.2:8080/api/v1.0/volumes/ \
 > options="ro,sync" \
 > root_path=1 \
 > sub_path=_my_home_directory \
@@ -155,7 +155,7 @@ X-Frame-Options: SAMEORIGIN
 }
 
 # List users' volumes, error - auth credentials
-$> http GET http://localhost:8080/api/v1.0/volumes/
+$> http GET http://192.168.50.2:8080/api/v1.0/volumes/
 HTTP/1.0 401 UNAUTHORIZED
 Allow: GET, POST, HEAD, OPTIONS
 Content-Type: application/json
@@ -170,7 +170,7 @@ X-Frame-Options: SAMEORIGIN
 }
 
 # List users' volumes
-$> http GET http://localhost:8080/api/v1.0/volumes/ --auth johndoe:johndoe
+$> http GET http://192.168.50.2:8080/api/v1.0/volumes/ --auth johndoe:johndoe
 HTTP/1.0 200 OK
 Allow: GET, POST, HEAD, OPTIONS
 Content-Type: application/json
@@ -182,7 +182,7 @@ X-Frame-Options: SAMEORIGIN
 [
     {
         "allowed_hosts": "192.168.20.2", 
-        "fileserver": "localhost", 
+        "fileserver": "192.168.50.2", 
         "fullpath": "/home/sachin/temp/_my_home_directory", 
         "options": "ro,sync", 
         "owner": "johndoe", 
@@ -201,7 +201,7 @@ $> cat /etc/exports
 /home/sachin/temp/_my_home_directory 192.168.20.2(ro,sync)
 
 # Delete a volume by specifying the volume's PK
-$> http DELETE http://localhost:8080/api/v1.0/volumes/5/ --auth johndoe:johndoe
+$> http DELETE http://192.168.50.2:8080/api/v1.0/volumes/5/ --auth johndoe:johndoe
 HTTP/1.0 204 NO CONTENT
 Allow: GET, DELETE, HEAD, OPTIONS
 Content-Length: 0
@@ -211,7 +211,7 @@ Vary: Accept
 X-Frame-Options: SAMEORIGIN
 
 # List volumes
-$> http GET http://localhost:8080/api/v1.0/volumes/ --auth johndoe:johndoe
+$> http GET http://192.168.50.2:8080/api/v1.0/volumes/ --auth johndoe:johndoe
 HTTP/1.0 200 OK
 Allow: GET, POST, HEAD, OPTIONS
 Content-Type: application/json
