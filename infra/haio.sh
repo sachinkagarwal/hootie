@@ -49,6 +49,9 @@ fab add_supervisor_process:rqworker2,/home/vagrant/hootie/nfsrest/manage.py,vagr
 ps -aux | grep rqworker1
 ps -aux | grep rqworker2
 
+#A root path directory
+mkdir /home/vagrant/nfsrootpath
+
 #Create Django sqllite DB 
 cd ..
 python manage.py migrate

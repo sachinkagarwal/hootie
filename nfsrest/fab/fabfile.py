@@ -66,6 +66,12 @@ def export_volume (exportDir = "/opt/share/test",
     """
     Create subdirectory if it doesn't already exist and export it via NFS
     """
+    if os.environ.has_key('FABAC_USER'):
+        env.user = os.environ['FABAC_USER']
+    if os.environ.has_key('FABRIC_PASS'):
+        env.password = os.environ['FABAC_PASS']
+    if os.environ.has_key('FABRIC_KEY'):
+        env.key_filename = os.environ['FABAC_KEY']
     sudo ("mkdir -p " + exportDir)
     if isinstance(options,list):
         options = ",".join(options)
@@ -80,6 +86,12 @@ def unexport_volume (volpath):
     Stop sharing the volume at volpath
     Remove the entry from /etc/exports
     """
+    if os.environ.has_key('FABAC_USER'):
+        env.user = os.environ['FABAC_USER']
+    if os.environ.has_key('FABRIC_PASS'):
+        env.password = os.environ['FABAC_PASS']
+    if os.environ.has_key('FABRIC_KEY'):
+        env.key_filename = os.environ['FABAC_KEY']
     sudo ("sed -i '/{}/d' /etc/exports".format(re.escape(volpath)))
     exportfscmd = " ".join(["exportfs","-r"])
     sudo (exportfscmd)
@@ -89,6 +101,12 @@ def delete_directory (dirpath):
     """
     Delete the directory dirpath
     """
+    if os.environ.has_key('FABAC_USER'):
+        env.user = os.environ['FABAC_USER']
+    if os.environ.has_key('FABRIC_PASS'):
+        env.password = os.environ['FABAC_PASS']
+    if os.environ.has_key('FABRIC_KEY'):
+        env.key_filename = os.environ['FABAC_KEY']
     #sudo ("rm -rf " + dirpath)
     pass # Add this later - dangerous function
 
@@ -153,6 +171,12 @@ def package_installed(pkg_name):
 	ref: http:superuser.com/questions/427318/#comment490784_427339
 	Currently only for Debian/Ubuntu 
 	"""
+    if os.environ.has_key('FABAC_USER'):
+        env.user = os.environ['FABAC_USER']
+    if os.environ.has_key('FABRIC_PASS'):
+        env.password = os.environ['FABAC_PASS']
+    if os.environ.has_key('FABRIC_KEY'):
+        env.key_filename = os.environ['FABAC_KEY']
     cmd_f = 'dpkg-query -l "%s" | grep -q ^.i'
     cmd = cmd_f % (pkg_name)
     with settings(warn_only=True):
@@ -166,6 +190,12 @@ def installpackage(pkg_name):
     Install package (Debian/Ubuntu only) if not already installed
     ref: http://stackoverflow.com/a/10439058/1093087
     """
+    if os.environ.has_key('FABAC_USER'):
+        env.user = os.environ['FABAC_USER']
+    if os.environ.has_key('FABRIC_PASS'):
+        env.password = os.environ['FABAC_PASS']
+    if os.environ.has_key('FABRIC_KEY'):
+        env.key_filename = os.environ['FABAC_KEY']
     run("date")
     if package_installed(pkg_name)==False:
         sudo('apt-get --force-yes --yes install %s' % (pkg_name))
