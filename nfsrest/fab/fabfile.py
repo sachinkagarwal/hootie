@@ -119,8 +119,8 @@ def add_supervisor_process(program_name, django_env,
         #append(scriptPath, scriptText, use_sudo = True)
         #sudo("chmod +x "+scriptPath)
         
-        cmd = " ".join(["source",django_env + ";", 
-		djangomgmtcmd, "rqworker", " ".join(program_args)])
+        cmd = 'bash -c "' + " ".join(["source",django_env + ";", 
+		djangomgmtcmd, "rqworker", " ".join(program_args)]) + '"'
         
         conftext = dedent (
             """

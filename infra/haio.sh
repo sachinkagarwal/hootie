@@ -11,6 +11,7 @@ sudo apt-get install -y \
     python-pip python-dev build-essential \
     supervisor redis-server \
     git python-virtualenv \
+    fabric \
 
 #Create SSH keys
 cat /dev/zero | ssh-keygen -q -N ""   
