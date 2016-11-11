@@ -14,10 +14,14 @@ A Hootie-all-in-one Vagrantfile is included in the infra directory. Install Vagr
 vagrant up
 ```
 
-This will setup a single Vagrant VM with Hootie and a nfs kernel server.
+This will setup a single Vagrant VM with Hootie and a nfs kernel server at 192.168.50.2 (private address space).
 
-Then, assuming the vagrant VM has an IP 1.2.3.4, you can skip to the usage section below (replace localhost with 1.2.3.4, port 8080).
-You can log into the Django admin interface at http://1.2.3.4:8080/admin (User, password: admin,admin)
+ * Log into the Vagrant VM (vagrant ssh) 
+ * Create a root-path directory that will be the base directory on which subdirectories will be created and exported.
+ * On the host machine, open a browser and log into the the django admin website at http://192.168.50.2:8080/admin (User, password: admin,admin) to add a NFS server via the GUI (simply specify its IP addres 192.168.50.2). Next, add a "rootpath", specifying the directory created above and with 192.168.50.2 as the containing NFS server; also specify the "capacity" of this rootpath.
+
+Then you can skip to the usage section below (replace localhost with 192.168.50.2, port 8080).
+
 
 # Detailed Installation Instructions
 
@@ -57,11 +61,9 @@ These instructions are for debian-based systems (e.g. Debian, Ubuntu, etc.).
     git clone https://github.com/sachinkagarwal/hootie.git
     ```
 
-    * Create a virtualenvironment and install the requirements.txt python packages
+    * Install the requirements.txt python packages
     ```
     cd hootie
-    virtualenv hootie
-    source hootie/bin/activate
     pip install -r requirements.txt
     ```
     
@@ -72,8 +74,8 @@ These instructions are for debian-based systems (e.g. Debian, Ubuntu, etc.).
     sudo service supervisor start
 
     cd nfsrest/fab
-    fab add_supervisor_process:<unique-worker-name>, <script.sh>, <python-environment-activation-path>, \
-    <full-path-to-Django-manage.py>, username, password, "'space-separated-queues-to-service'"
+    fab add_supervisor_process:<unique-worker-name>, \
+    <full-path-to-Django-manage.py>, username, password, "space-separated-queues-to-service"
 
     #Example - start 2 workers
     fab add_supervisor_process:rqworker1,/home/vagrant/hootie/nfsrest/manage.py,vagrant,vagrant,"queue1 queue2 queue3 queue4 queue5"

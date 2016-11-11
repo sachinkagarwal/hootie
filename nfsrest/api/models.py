@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from modelshelper import *
 from fabric.api import execute
-import logging
 from django.core.exceptions import ValidationError
 from django.core.validators import *
 
@@ -70,8 +69,6 @@ class Volume(BaseModel):
         Overriding save to create/re-export
         a volume
         """
-        logger = logging.getLogger(__name__)
-        logger.info("Creating a volume @@@@@@ {}".format(self.path))
         execute(CreateOrExport, self.root_path.path, self.sub_path,
                 self.allowed_hosts,self.options,
                 hosts = [self.root_path.nfs_server.dns_name])
