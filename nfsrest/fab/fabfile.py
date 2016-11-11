@@ -8,12 +8,14 @@ if os.environ.has_key('FABAC_USER'):
     env.user = os.environ['FABAC_USER']
 if os.environ.has_key('FABRIC_PASS'):
     env.password = os.environ['FABAC_PASS']
+if os.environ.has_key('FABRIC_KEY'):
+    env.password = os.environ['FABAC_KEY']
+
 
 # While using "execute" to call fabric methods
 # this env.hosts is overridden by the passed
 # hosts variable (in models.py)
 env.hosts = ["localhost"]
-
 env.remote_interrupt = True
 
 

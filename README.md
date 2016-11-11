@@ -66,7 +66,12 @@ These instructions are for debian-based systems (e.g. Debian, Ubuntu, etc.).
     ```
     git clone https://github.com/sachinkagarwal/hootie.git
     ```
-
+    * Add environment variable credentials for fabric in the .bashrc, something like.
+    ```
+    export FABAC_USER=vagrant
+    export FABAC_PASS=vagrant
+    export FABAC_KEY=/home/vagrant/.ssh/id_rsa
+    ```
     * Install the requirements.txt python packages
     ```
     cd hootie

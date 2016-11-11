@@ -20,6 +20,13 @@ service supervisor start
 cat << EOF > /home/vagrant/installasvagrant.sh
 #!/bin/bash
 cd /home/vagrant
+
+#Environment variables
+cat << EF >> /home/vagrant/.bashrc
+export FABAC_USER=vagrant
+export FABAC_PASS=vagrant
+export FABAC_KEY=/home/vagrant/.ssh/id_rsa
+EF
 #Create SSH keys
 cat /dev/zero | ssh-keygen -q -N ""   
 
