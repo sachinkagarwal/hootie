@@ -92,7 +92,7 @@ def delete_directory (dirpath):
 
 
 @task
-def add_supervisor_process(program_name, django_env, 
+def add_supervisor_process(program_name,
     djangomgmtcmd, user, password, *program_args):
     """
     Add a script to supervisor.
@@ -119,8 +119,7 @@ def add_supervisor_process(program_name, django_env,
         #append(scriptPath, scriptText, use_sudo = True)
         #sudo("chmod +x "+scriptPath)
         
-        cmd = 'bash -c "' + " ".join(["source",django_env + ";", 
-		djangomgmtcmd, "rqworker", " ".join(program_args)]) + '"'
+        cmd = 'bash -c "' + " ".join([djangomgmtcmd, "rqworker", " ".join(program_args)]) + '"'
         
         conftext = dedent (
             """
