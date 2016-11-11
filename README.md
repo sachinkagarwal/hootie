@@ -9,8 +9,14 @@ Here is a picture illustrating the system's architecture.
 
 # Quick start
 
+* Clone the Hootie master branch from 
+    ```
+    git clone https://github.com/sachinkagarwal/hootie.git
+    ```
+
 A Hootie-all-in-one Vagrantfile is included in the infra directory. Install Vagrant, and then simply run
 ```
+cd hootie/infra
 vagrant up
 ```
 
