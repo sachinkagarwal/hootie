@@ -13,10 +13,14 @@ sudo apt-get install -y \
     git python-virtualenv \
     fabric \
 
+#Start supervisor
+service supervisor start
+
+# Become vagrant User
+sudo su - vagrant
+
 #Create SSH keys
 cat /dev/zero | ssh-keygen -q -N ""   
-
-echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'admin')" | python manage.py shell
 
 # Clone hootiegit clone 
 git clone https://github.com/sachinkagarwal/hootie.git
@@ -25,10 +29,8 @@ git clone https://github.com/sachinkagarwal/hootie.git
 cd hootie
 #virtualenv hootie
 #source hootie/bin/activate
-pip install -r requirements.txt
+sudo pip install -r requirements.txt
 
-#Start supervisor
-sudo service supervisor start
 
 #Start 2 RQ workers
 cd nfsrest/fab
