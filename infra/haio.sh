@@ -33,7 +33,8 @@ cd /home/vagrant/.ssh
 cat id_rsa.pub >> authorized_keys
 chmod 600 authorized_keys
 # Clone hootie
-git clone https://github.com/sachinkagarwal/hootie.git
+cd /home/vagrant
+git clone https://github.com/sachinkagarwal/hootie.git /home/vagrant
 sleep 5
 #pip Packages
 cd hootie
@@ -47,7 +48,7 @@ nohup bash -c "python /home/vagrant/hootie/nfsrest/manage.py rqworker queue1 que
 nohup bash -c "python /home/vagrant/hootie/nfsrest/manage.py rqworker queue1 queue2 queue3 queue4 queue5"  1>/dev/null 2>/dev/null &
 
 #A root path directory
-mkdir /home/vagrant/nfsrootpath
+mkdir -p /home/vagrant/nfsrootpath
 
 #Create Django sqllite DB 
 cd /home/vagrant/hootie/nfsrest
