@@ -61,7 +61,7 @@ These instructions are for debian-based systems (e.g. Debian, Ubuntu, etc.).
     # Avoiding passphrase prompts
     cat /dev/zero | ssh-keygen -q -N ""
     ```
-    Use ssh-copy-id to allow passwordless login from the vagrant user to each NFS server
+    Use ssh-copy-id to allow passwordless login from the vagrant user on the Hootie server to each NFS server
     * Clone the Hootie master branch from 
     ```
     git clone https://github.com/sachinkagarwal/hootie.git
