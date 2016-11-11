@@ -6,6 +6,9 @@ So how do you put a RESTful API in front of the command line? The Hootie project
 
 Here is a picture illustrating the system's architecture.
 
+![Architecture][logo]
+
+[logo]: https://github.com/sachinkagarwal/hootie/raw/master/doc/hootie-high-level-arch.png "Hootie -High level architecture."
 
 # Quick start
 
