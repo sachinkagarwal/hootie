@@ -230,4 +230,6 @@ $> cat /etc/exports
 
 $> 
 
+# Note - to see what is curretly exported, you can also look at /var/lib/nfs/etab
+
 ```
