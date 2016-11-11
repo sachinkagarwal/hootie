@@ -16,9 +16,10 @@ sudo apt-get install -y \
 #Start supervisor
 service supervisor start
 
-# Become vagrant User
-su - vagrant
 
+cat << EOF > /home/vagrant/installasvagrant.sh
+#!/bin/bash
+cd /home/vagrant
 #Create SSH keys
 cat /dev/zero | ssh-keygen -q -N ""   
 
@@ -47,3 +48,8 @@ python manage.py migrate
 echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'admin')" | python manage.py shell
  
 python manage.py runserver 0.0.0.0:8080
+EOF
+
+chmod 755 /home/vagrant/installasvagrant.sh
+chown vagrant:vagrant /home/vagrant/installasvagrant.sh
+su -c /home/vagrant/installasvagrant.sh - vagrant
